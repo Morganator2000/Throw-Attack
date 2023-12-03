@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/infoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
+        android:src="@drawable/info24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:minWidth="48dp" />
+
     <TextView
         android:id="@+id/strengthText"
         android:layout_width="wrap_content"
@@ -132,16 +144,21 @@
         app:layout_constraintStart_toStartOf="@+id/pushDragLiftOutput"
         app:layout_constraintTop_toTopOf="@+id/rangeText" />
 
-    <ImageButton
-        android:id="@+id/infoButton"
+    <TextView
+        android:id="@+id/damageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:minHeight="48dp"
-        android:src="@drawable/info24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:minWidth="48dp" />
+        android:layout_marginTop="30dp"
+        android:text="Damage:"
+        app:layout_constraintStart_toStartOf="@+id/rangeText"
+        app:layout_constraintTop_toBottomOf="@+id/rangeText" />
+
+    <TextView
+        android:id="@+id/damageOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/damageText"
+        app:layout_constraintStart_toStartOf="@+id/rangeOutput"
+        app:layout_constraintTop_toTopOf="@+id/damageText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
