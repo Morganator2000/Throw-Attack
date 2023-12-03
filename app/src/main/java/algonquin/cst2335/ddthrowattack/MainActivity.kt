@@ -4,6 +4,7 @@ import algonquin.cst2335.ddthrowattack.databinding.MainActivityBinding
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.core.content.ContextCompat
 
 class MainActivity : ComponentActivity() {
     private lateinit var binding: MainActivityBinding
@@ -40,6 +41,14 @@ class MainActivity : ComponentActivity() {
             binding.capacityOutput.text = String.format("$capacity lbs.")
             val pushLiftDrag = calculatePushDragLiftLimit(strength, isLarge)
             binding.pushDragLiftOutput.text = String.format("$pushLiftDrag lbs.")
+            if (canThrow(weight, pushLiftDrag)) {
+                val throwShort = calculateRangeShort(weight, pushLiftDrag)
+                val throwLong = calculateRangeLong(weight, pushLiftDrag)
+                binding.rangeOutput.text = String.format("$throwShort" + "ft./" + "$throwLong" + "ft.")
+            } else {
+                binding.rangeOutput.text = String.format("Cannot Throw")
+                binding.rangeOutput.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light))
+            }
         }
     }
 
@@ -80,9 +89,5 @@ class MainActivity : ComponentActivity() {
         difference -= remainder
         val additionalRange = difference/fraction
         return 30 + 10 * additionalRange
-    }
-
-    private fun calculateDamage() {
-
     }
 }
