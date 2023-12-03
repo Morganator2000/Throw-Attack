@@ -36,7 +36,10 @@ class MainActivity : ComponentActivity() {
         }
 
         calculateButton.setOnClickListener{
-            binding.capacityOutput.text = null //TODO
+            val capacity = calculateCapacity(strength, isLarge)
+            binding.capacityOutput.text = String.format("$capacity lbs.")
+            val pushLiftDrag = calculatePushDragLiftLimit(strength, isLarge)
+            binding.pushDragLiftOutput.text = String.format("$pushLiftDrag lbs.")
         }
     }
 
