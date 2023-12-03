@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/strengthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Your strength score:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/strengthInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/strengthText"
+        app:layout_constraintStart_toEndOf="@+id/strengthText"
+        app:layout_constraintTop_toTopOf="@+id/strengthText" />
+
+    <TextView
+        android:id="@+id/sizeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Your size:"
+        app:layout_constraintStart_toStartOf="@+id/strengthText"
+        app:layout_constraintTop_toBottomOf="@+id/strengthText" />
+
+    <Spinner
+        android:id="@+id/sizeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/sizes"
+        android:minHeight="48dp"
+        android:prompt="@string/size_prompt"
+        app:layout_constraintBottom_toBottomOf="@+id/sizeText"
+        app:layout_constraintStart_toStartOf="@+id/strengthInput"
+        app:layout_constraintTop_toTopOf="@+id/sizeText" />
+
+    <TextView
+        android:id="@+id/enemyWeightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Enemy Weight (lbs):"
+        app:layout_constraintStart_toStartOf="@+id/sizeText"
+        app:layout_constraintTop_toBottomOf="@+id/sizeInput" />
+
+    <EditText
+        android:id="@+id/enemyWeightInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/enemyWeightText"
+        app:layout_constraintStart_toStartOf="@+id/sizeInput"
+        app:layout_constraintTop_toTopOf="@+id/enemyWeightText" />
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Calculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enemyWeightInput" />
+
+    <TextView
+        android:id="@+id/capacityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Carrying capacity:"
+        app:layout_constraintStart_toStartOf="@+id/sizeText"
+        app:layout_constraintTop_toBottomOf="@+id/calculateButton" />
+
+    <TextView
+        android:id="@+id/capacityOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/capacityText"
+        app:layout_constraintStart_toStartOf="@+id/pushDragLiftOutput"
+        app:layout_constraintTop_toTopOf="@+id/capacityText" />
+
+    <TextView
+        android:id="@+id/pushDragLiftText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Push/Drag/Lift limit:"
+        app:layout_constraintStart_toStartOf="@+id/capacityText"
+        app:layout_constraintTop_toBottomOf="@+id/capacityText" />
+
+    <TextView
+        android:id="@+id/pushDragLiftOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pushDragLiftText"
+        app:layout_constraintStart_toEndOf="@+id/pushDragLiftText"
+        app:layout_constraintTop_toTopOf="@+id/pushDragLiftText" />
+
+    <TextView
+        android:id="@+id/rangeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Throw range:"
+        app:layout_constraintStart_toStartOf="@+id/pushDragLiftText"
+        app:layout_constraintTop_toBottomOf="@+id/pushDragLiftText" />
+
+    <TextView
+        android:id="@+id/rangeOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/rangeText"
+        app:layout_constraintStart_toStartOf="@+id/pushDragLiftOutput"
+        app:layout_constraintTop_toTopOf="@+id/rangeText" />
+
+    <TextView
+        android:id="@+id/damageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Damage:"
+        app:layout_constraintStart_toStartOf="@+id/rangeText"
+        app:layout_constraintTop_toBottomOf="@+id/rangeText" />
+
+    <TextView
+        android:id="@+id/damageOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/damageText"
+        app:layout_constraintStart_toStartOf="@+id/rangeOutput"
+        app:layout_constraintTop_toTopOf="@+id/damageText" />
+
+    <ImageButton
+        android:id="@+id/infoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
+        android:src="@drawable/info24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:minWidth="48dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
