@@ -72,8 +72,9 @@ class MainActivity : ComponentActivity() {
                 val throwShort = calculateRangeShort(weight, pushLiftDrag)
                 val throwLong = calculateRangeLong(weight, pushLiftDrag)
                 binding.rangeOutput.text = String.format("$throwShort" + "ft./" + "$throwLong" + "ft.")
-                //TODO: set colour to change back to default
+                binding.rangeOutput.setTextColor(ContextCompat.getColor(this, android.R.color.white))
                 binding.damageOutput.text = calculateDamage(strength, throwShort, throwLong)
+                binding.damageOutput.setTextColor(ContextCompat.getColor(this, android.R.color.white))
             } else {
                 binding.rangeOutput.text = String.format("Cannot Throw")
                 binding.rangeOutput.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light))
@@ -110,7 +111,7 @@ class MainActivity : ComponentActivity() {
         val remainder = difference%fraction
         difference -= remainder
         val additionalRange = difference/fraction
-        return 10 + 5 * additionalRange
+        return 5 + 5 * additionalRange
     }
 
     private fun calculateRangeLong(weight: Int, pdl: Int): Int {
@@ -119,7 +120,7 @@ class MainActivity : ComponentActivity() {
         val remainder = difference%fraction
         difference -= remainder
         val additionalRange = difference/fraction
-        return 30 + 10 * additionalRange
+        return 10 + 10 * additionalRange
     }
 
     private fun calculateDamage(strength: Int, shortRange: Int, longRange: Int): String {
