@@ -3,5 +3,6 @@
     <string-array name="sizes">
         <item>Small/Medium</item>
         <item>Large/Powerful Build</item>
+        <item>Huge</item>
     </string-array>
 </resources>
