@@ -2,7 +2,6 @@ package algonquin.cst2335.ddthrowattack
 
 import algonquin.cst2335.ddthrowattack.databinding.MainActivityBinding
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
@@ -109,8 +108,17 @@ class MainActivity : ComponentActivity() {
 //    }
 
     private fun calculateRangeShort(weight: Int, capacity: Int): Int {
-        val additionalRange = capacity/weight
-        return 20 + 5 * additionalRange
+        var rangeMultiplier: Int =
+            if (weight*4 <= capacity) {
+                4
+            } else if (weight*3 <= capacity) {
+                3
+            }else if (weight*2 <= capacity) {
+                2
+            } else {
+                1
+            }
+        return 5 * rangeMultiplier
     }
     //
     //20 str + 40 lb + huge = 60 ft
@@ -153,7 +161,7 @@ class MainActivity : ComponentActivity() {
         val strengthModifier = ((baseStrength - 10)/2)
         val isIncrease: Boolean = strengthModifier >= 0
 
-        val dice = weight/30 + 1
+        val dice = weight/50 + 1
         return ("$dice" + "d6"+ if (isIncrease) {"+"} else {""} + "$strengthModifier")
         //200 = 8d10
         // 45 = 3d10
