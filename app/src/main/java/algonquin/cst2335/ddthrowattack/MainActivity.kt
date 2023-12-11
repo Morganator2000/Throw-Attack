@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 
+
 class MainActivity : ComponentActivity() {
     private lateinit var binding: MainActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +84,21 @@ class MainActivity : ComponentActivity() {
                 binding.damageOutput.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light))
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val loadedPreferences = getSharedPreferences("ThrowData", MODE_PRIVATE)
+        val savedStrength = loadedPreferences.getInt("strength", 15)
+        binding.strengthInput.setText(savedStrength.toString())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = getSharedPreferences("ThrowData", MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+        edit.putInt("strength", binding.strengthInput.text.toString().toInt())
+        edit.apply()
     }
 
     private fun calculateCapacity(strength: Int, sizeModifier: Int): Int {
