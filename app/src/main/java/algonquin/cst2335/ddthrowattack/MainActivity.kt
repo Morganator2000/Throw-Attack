@@ -23,9 +23,7 @@ class MainActivity : ComponentActivity() {
             builder.setTitle("About")
                 .setMessage("The thrown opponent will be knocked prone upon landing even if the target is not hit. It can decide to use its reaction to make a Dex Saving Throw which equals to 10 + your proficiency bonus + your STR modifier to halve the damage it will take.\n" +
                         "\n" +
-                        "The target you want to hit can take the Dex Saving Throw without using its reaction to also halve the damage. If the target fails the Dex Saving Throw it is also knocked prone.\n" +
-                        "\n" +
-                        "The damage is calculated as if the opponent is falling to the ground. That means 1d6 for every 10ft. You may add your STR modifier to the damage roll. Both the thrown and the hit opponent take the damage.")
+                        "The target you want to hit can take the Dex Saving Throw without using its reaction to also halve the damage. If the target fails the Dex Saving Throw it is also knocked prone.\n")
                 .setPositiveButton("Dismiss") { dialog, _ ->
                     dialog.dismiss()
                 }
@@ -75,7 +73,7 @@ class MainActivity : ComponentActivity() {
                 val throwLong = calculateRangeLong(throwShort)
                 binding.rangeOutput.text = String.format("$throwShort" + "ft./" + "$throwLong" + "ft.")
                 binding.rangeOutput.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-                binding.damageOutput.text = calculateDamage(strength, weight)
+                binding.damageOutput.text = calculateDamage(strength, weight, capacity)
                 binding.damageOutput.setTextColor(ContextCompat.getColor(this, android.R.color.white))
             } else {
                 binding.rangeOutput.text = String.format("Cannot Throw")
@@ -91,6 +89,8 @@ class MainActivity : ComponentActivity() {
         val loadedPreferences = getSharedPreferences("ThrowData", MODE_PRIVATE)
         val savedStrength = loadedPreferences.getInt("strength", 15)
         binding.strengthInput.setText(savedStrength.toString())
+        val savedSpinnerPosition = loadedPreferences.getInt("spinner_position", 0)
+        binding.sizeInput.setSelection(savedSpinnerPosition)
     }
 
     override fun onPause() {
@@ -98,6 +98,7 @@ class MainActivity : ComponentActivity() {
         val sharedPreferences = getSharedPreferences("ThrowData", MODE_PRIVATE)
         val edit = sharedPreferences.edit()
         edit.putInt("strength", binding.strengthInput.text.toString().toInt())
+        edit.putInt("spinner_position", binding.sizeInput.selectedItemPosition)
         edit.apply()
     }
 
@@ -129,16 +130,25 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun calculateRangeLong(shortRange: Int): Int {
-        return shortRange * 3
+        if (shortRange == 5) {
+            return 5
+        } else {
+            return shortRange * 3
+        }
     }
 
-    private fun calculateDamage(strength: Int, weight: Int): String {
+    private fun calculateDamage(strength: Int, weight: Int, capacity: Int): String {
         var baseStrength = strength
         if (strength%2 == 1) {--baseStrength}
         val strengthModifier = ((baseStrength - 10)/2)
         val isIncrease: Boolean = strengthModifier >= 0
 
-        val dice = weight/50 + 1
-        return ("$dice" + "d6"+ if (isIncrease) {"+"} else {""} + "$strengthModifier")
+        if (calculateRangeShort(weight, capacity) == 5) {
+            return ("1d8" + if (isIncrease) {"+"} else {""} + "$strengthModifier")
+        } else {
+            val dice = weight/50 + 1
+            return ("$dice" + "d6" + if (isIncrease) {"+"} else {""} + "$strengthModifier")
+        }
+
     }
 }
