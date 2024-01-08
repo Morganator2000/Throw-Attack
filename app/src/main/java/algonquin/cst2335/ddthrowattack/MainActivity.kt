@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
                 "Small/Medium" -> sizeModifier = 1
                 "Large/Powerful Build" -> sizeModifier = 2
                 "Huge" -> sizeModifier = 4
+                "Gargantuan" -> sizeModifier = 8
             }
             val weightInputText = binding.enemyWeightInput.text.toString()
             val weight: Int? = weightInputText.toIntOrNull()
