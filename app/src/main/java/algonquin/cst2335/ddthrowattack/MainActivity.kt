@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
                     .show()
                 return@setOnClickListener
             }
+            //Verify Size mod
             val size = binding.sizeInput.selectedItem.toString()
             var sizeModifier = 1
             when (size) {
